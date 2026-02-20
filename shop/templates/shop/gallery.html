@@ -1,0 +1,45 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Gallery - CHANDRABHUSHAN ONLINE{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <h1 class="text-center text-primary mb-4">Gallery</h1>
+    <p class="text-center text-muted mb-5">Our service center and service highlights.</p>
+
+    <div class="row g-4">
+        <!-- Shop Photo - First Item -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card gallery-card overflow-hidden shadow-sm">
+                <img src="{% static 'shop/images/shop.jpeg' %}" 
+                     alt="CHANDRABHUSHAN ONLINE Shop" 
+                     class="card-img-top img-fluid" 
+                     style="height: 250px; object-fit: cover; width: 100%;"
+                     onerror="this.style.display='none';">
+                <div class="card-body py-2">
+                    <p class="card-title mb-0 small fw-bold">CHANDRABHUSHAN ONLINE Shop</p>
+                </div>
+            </div>
+        </div>
+        {% for product in products %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card gallery-card overflow-hidden shadow-sm">
+                <a href="{% url 'shop:product_detail' product.pk %}">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 250px; object-fit: cover;">
+                </a>
+                <div class="card-body py-2">
+                    <p class="card-title mb-0 small">{{ product.name }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% if not products %}
+        <div class="col-12 text-center py-5 text-muted">
+            <i class="bi bi-images display-4"></i>
+            <p class="mt-2">More images coming soon.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

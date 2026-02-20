@@ -1,0 +1,59 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Contact - CHANDRABHUSHAN ONLINE{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <h1 class="text-center text-primary mb-4">Contact Us</h1>
+    <p class="text-center text-muted mb-5">Reach out for inquiries and assistance with online services.</p>
+
+    <div class="row">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5><i class="bi bi-telephone text-primary"></i> Phone</h5>
+                    <p class="mb-0"><a href="tel:7488578184" class="text-dark text-break">7488578184</a></p>
+                    <hr>
+                    <h5><i class="bi bi-envelope text-info"></i> Email</h5>
+                    <p class="mb-0"><a href="mailto:infochandrabhushan74@gmail.com" class="text-dark text-break">infochandrabhushan74@gmail.com</a></p>
+                    <hr>
+                    <h5><i class="bi bi-whatsapp text-success"></i> WhatsApp</h5>
+                    <p class="mb-0"><a href="https://wa.me/917488578184" target="_blank" class="text-dark">Chat on WhatsApp</a></p>
+                    <hr>
+                    <h5><i class="bi bi-geo-alt text-danger"></i> Location</h5>
+                    <p class="small text-muted mb-0">Find us on the map below.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5>Send Inquiry</h5>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        {% if field.name != 'related_service' %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}<div class="text-danger small">{{ field.errors.0 }}</div>{% endif %}
+                        </div>
+                        {% else %}
+                        {{ field }}
+                        {% endif %}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h5 class="mb-3">Find Us on Map</h5>
+        <div class="ratio ratio-21x9 bg-light rounded overflow-hidden shadow-sm">
+            <iframe src="https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1771592582739!5m2!1sen!2sin!6m8!1m7!1s6_UkBLsCZ-NXvJ_1MwNONQ!2m2!1d26.22165485153601!2d85.07475219433877!3f79.76052179025669!4f2.8233461012170977!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

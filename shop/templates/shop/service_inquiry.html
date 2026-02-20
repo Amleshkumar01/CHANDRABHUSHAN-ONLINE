@@ -1,0 +1,61 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Contact to Fill Form - {{ service.title }} - CHANDRABHUSHAN ONLINE{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'shop:service_list' %}">Services & Updates</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'shop:service_detail' service.pk %}">{{ service.title }}</a></li>
+            <li class="breadcrumb-item active">Contact to Fill Form</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-person-plus"></i> Contact to Fill Form</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Service:</strong> {{ service.title }}<br>
+                        <strong>Category:</strong> {{ service.category }}
+                    </div>
+                    <p class="text-muted">Fill out the form below and we will contact you to help fill this form/service application.</p>
+                    
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {{ form.related_service }}
+                        <div class="mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">Your Name *</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}<div class="text-danger small">{{ form.name.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number *</label>
+                            {{ form.phone }}
+                            {% if form.phone.errors %}<div class="text-danger small">{{ form.phone.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Email Address *</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}<div class="text-danger small">{{ form.email.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.message.id_for_label }}" class="form-label">Message *</label>
+                            {{ form.message }}
+                            {% if form.message.errors %}<div class="text-danger small">{{ form.message.errors.0 }}</div>{% endif %}
+                            <small class="text-muted">Tell us about your requirements or any questions.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Submit Inquiry</button>
+                        <a href="{% url 'shop:service_detail' service.pk %}" class="btn btn-outline-secondary w-100 mt-2">Back to Service Details</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

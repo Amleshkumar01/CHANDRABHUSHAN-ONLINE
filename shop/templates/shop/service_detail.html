@@ -1,0 +1,120 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}{{ service.title }} - CHANDRABHUSHAN ONLINE{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'shop:service_list' %}">Services & Updates</a></li>
+            <li class="breadcrumb-item active">{{ service.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                {% if service.image %}
+                <img src="{{ service.image.url }}" class="card-img-top img-fluid" alt="{{ service.title }}" style="max-height: 400px; object-fit: cover; width: 100%;">
+                {% endif %}
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3 gap-2">
+                        <span class="badge bg-info fs-6">{{ service.category }}</span>
+                        {% if service.is_active %}
+                        <span class="badge bg-success fs-6">Active</span>
+                        {% elif service.is_expired %}
+                        <span class="badge bg-secondary fs-6">Expired</span>
+                        {% else %}
+                        <span class="badge bg-warning fs-6">Upcoming</span>
+                        {% endif %}
+                    </div>
+                    <h1 class="text-primary">{{ service.title }}</h1>
+                    <p class="lead">{{ service.short_description }}</p>
+                    <hr>
+                    <div class="mb-4">
+                        <h5>Full Description</h5>
+                        <p class="text-muted">{{ service.full_description|linebreaks }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Important Dates -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Important Dates</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2"><strong>Start Date:</strong><br>{{ service.start_date|date:"d M Y" }}</p>
+                    <p class="mb-0"><strong>Last Date:</strong><br>{{ service.end_date|date:"d M Y" }}</p>
+                    {% if service.is_expired %}
+                    <div class="alert alert-danger mt-3 mb-0 small">This service has expired.</div>
+                    {% elif service.is_active %}
+                    <div class="alert alert-success mt-3 mb-0 small">Currently accepting applications.</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Required Documents -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-file-earmark-check"></i> Required Documents</h5>
+                </div>
+                <div class="card-body">
+                    <div>{{ service.required_documents|linebreaks }}</div>
+                </div>
+            </div>
+
+            <!-- Eligibility -->
+            {% if service.eligibility %}
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="bi bi-person-check"></i> Eligibility</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">{{ service.eligibility|linebreaks }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Apply Button -->
+            {% if service.apply_link %}
+            <div class="d-grid mb-3">
+                <a href="{{ service.apply_link }}" target="_blank" rel="noopener" class="btn btn-success btn-lg">
+                    <i class="bi bi-box-arrow-up-right"></i> Official Apply Link
+                </a>
+            </div>
+            {% endif %}
+            
+            <!-- Contact to Fill Form Button -->
+            <div class="d-grid">
+                <a href="{% url 'shop:service_inquiry' service.pk %}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-person-plus"></i> Contact to Fill Form
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Important Instructions -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Important Instructions</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li>Please read all details carefully before applying.</li>
+                        <li>Ensure you have all required documents ready.</li>
+                        <li>Submit your application before the last date.</li>
+                        <li>Keep a copy of your submitted application for reference.</li>
+                        <li>For any queries, contact us via phone or WhatsApp.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

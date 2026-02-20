@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Delete Service - Admin - CHANDRABHUSHAN ONLINE{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body text-center p-4">
+                    <h4 class="text-danger">Delete Service?</h4>
+                    <p>Are you sure you want to delete <strong>{{ service.title }}</strong>? This cannot be undone.</p>
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    </form>
+                    <a href="{% url 'shop:admin_service_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

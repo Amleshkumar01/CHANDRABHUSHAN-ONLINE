@@ -1,0 +1,50 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Inquiries - Admin - CHANDRABHUSHAN ONLINE{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <h2 class="text-primary mb-4"><i class="bi bi-inbox"></i> Customer Inquiries</h2>
+
+    <div class="card shadow">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Related Service</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for inquiry in inquiries %}
+                        <tr class="{% if not inquiry.read %}table-warning{% endif %}">
+                            <td><strong>{{ inquiry.name }}</strong></td>
+                            <td><a href="tel:{{ inquiry.phone }}" class="text-break">{{ inquiry.phone }}</a></td>
+                            <td><a href="mailto:{{ inquiry.email }}" class="text-break">{{ inquiry.email|truncatechars:25 }}</a></td>
+                            <td>{% if inquiry.related_service %}<span class="badge bg-info d-inline-block text-truncate" style="max-width: 150px;" title="{{ inquiry.related_service.title }}">{{ inquiry.related_service.title }}</span><br><small class="text-muted">{{ inquiry.related_service.category }}</small>{% else %}<span class="text-muted">General Inquiry</span>{% endif %}</td>
+                            <td class="text-break">{{ inquiry.message|truncatewords:10 }}</td>
+                            <td>{{ inquiry.created_at|date:"d M Y H:i" }}</td>
+                            <td>{% if inquiry.read %}<span class="badge bg-secondary">Read</span>{% else %}<span class="badge bg-warning">New</span>{% endif %}</td>
+                            <td>
+                                {% if not inquiry.read %}
+                                <a href="{% url 'shop:admin_inquiry_mark_read' inquiry.pk %}" class="btn btn-sm btn-outline-success">Mark Read</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="8" class="text-center text-muted py-4">No inquiries yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

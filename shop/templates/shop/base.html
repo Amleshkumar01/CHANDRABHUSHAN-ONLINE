@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="CHANDRABHUSHAN ONLINE - Your trusted online service center for government forms, jobs, admit cards, and more.">
+    <title>{% block title %}CHANDRABHUSHAN ONLINE{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'shop:home' %}">
+                <i class="bi bi-shop"></i> <span class="d-none d-sm-inline">CHANDRABHUSHAN ONLINE</span><span class="d-sm-none">CBO</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:product_list' %}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:service_list' %}">Services & Updates</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:gallery' %}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:contact' %}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:about' %}">About Us</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:admin_dashboard' %}"><i class="bi bi-speedometer2"></i> Admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:admin_logout' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Top Information Bar -->
+    <div class="top-info-bar">
+        <div class="container">
+            <div class="top-info-content">
+                <div class="info-item">
+                    <i class="bi bi-telephone"></i>
+                    <a href="tel:7488578184">7488578184</a>
+                </div>
+                <div class="info-item">
+                    <i class="bi bi-envelope"></i>
+                    <a href="mailto:infochandrabhushan74@gmail.com">infochandrabhushan74@gmail.com</a>
+                </div>
+                <div class="info-item">
+                    <i class="bi bi-clock"></i>
+                    <span>9 AM – 7 PM</span>
+                </div>
+                <div class="info-item d-none d-md-flex">
+                    <i class="bi bi-shield-check"></i>
+                    <span class="fw-semibold">Trusted Online Service Center</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrolling Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-wrapper">
+            <div class="notice-content">
+                <span class="notice-item">📢 New Job Forms Available</span>
+                <span class="notice-separator">|</span>
+                <span class="notice-item">📋 Admit Card Download Started</span>
+                <span class="notice-separator">|</span>
+                <span class="notice-item">🎓 Scholarship Applications Open</span>
+                <span class="notice-separator">|</span>
+                <span class="notice-item">📊 Result Checking Service Available</span>
+                <span class="notice-separator">|</span>
+                <span class="notice-item">📢 New Job Forms Available</span>
+                <span class="notice-separator">|</span>
+                <span class="notice-item">📋 Admit Card Download Started</span>
+                <span class="notice-separator">|</span>
+                <span class="notice-item">🎓 Scholarship Applications Open</span>
+                <span class="notice-separator">|</span>
+                <span class="notice-item">📊 Result Checking Service Available</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        {% if messages %}
+        <div class="container mt-2">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-warning">CHANDRABHUSHAN ONLINE</h5>
+                    <p class="small">Your trusted online service center for government forms, jobs, admit cards, and more.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="{% url 'shop:home' %}" class="text-light">Home</a></li>
+                        <li><a href="{% url 'shop:about' %}" class="text-light">About Us</a></li>
+                        <li><a href="{% url 'shop:product_list' %}" class="text-light">Products</a></li>
+                        <li><a href="{% url 'shop:service_list' %}" class="text-light">Services & Updates</a></li>
+                        <li><a href="{% url 'shop:gallery' %}" class="text-light">Gallery</a></li>
+                        <li><a href="{% url 'shop:contact' %}" class="text-light">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h6>Contact</h6>
+                    <p class="small mb-1"><i class="bi bi-telephone"></i> <a href="tel:7488578184" class="text-light">7488578184</a></p>
+                    <p class="small mb-0"><i class="bi bi-envelope"></i> <a href="mailto:infochandrabhushan74@gmail.com" class="text-light">infochandrabhushan74@gmail.com</a></p>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <p class="text-center small text-secondary mb-0">&copy; {% now "Y" %} CHANDRABHUSHAN ONLINE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/917488578184" class="whatsapp-float" target="_blank" rel="noopener" title="Chat on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

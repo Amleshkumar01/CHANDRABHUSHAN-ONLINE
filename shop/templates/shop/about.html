@@ -1,0 +1,62 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}About Us - CHANDRABHUSHAN ONLINE{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <h1 class="text-center text-primary mb-4">About CHANDRABHUSHAN ONLINE</h1>
+
+    <!-- Shop Photo Section -->
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow-lg border-0 overflow-hidden">
+                <img src="{% static 'shop/images/shop.jpeg' %}" 
+                     alt="CHANDRABHUSHAN ONLINE Shop" 
+                     class="img-fluid w-100 shop-about-image"
+                     style="max-height: 500px; object-fit: cover;"
+                     onerror="this.style.display='none';">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h3>Our Story</h3>
+            <p class="lead">CHANDRABHUSHAN ONLINE started with a simple goal: to bring quality online services and reliable assistance to our customers.</p>
+            <p>Over the years we have built a reputation for trust and customer satisfaction. We specialize in helping customers with government forms, job applications, admit cards, scholarships, and various online services. We believe in transparent dealings and putting our customers first.</p>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-person-badge text-primary display-6"></i>
+                    <h4 class="mt-3">Owner</h4>
+                    <p class="text-muted">Our business is run with care and dedication. The owner is actively involved in ensuring every service request meets our standards and every customer receives reliable assistance.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-award text-primary display-6"></i>
+                    <h4 class="mt-3">Trust & Quality</h4>
+                    <p class="text-muted">We stand behind our services. Customer trust is our most valuable asset, and we work hard to maintain it through honest service, reliable assistance, and quality support for all your online service needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center py-4 bg-light rounded">
+        <h4>Why Choose Us?</h4>
+        <div class="row mt-3 g-3">
+            <div class="col-6 col-md-3"><i class="bi bi-check2-circle text-success"></i> Trusted Service</div>
+            <div class="col-6 col-md-3"><i class="bi bi-check2-circle text-success"></i> Expert Assistance</div>
+            <div class="col-6 col-md-3"><i class="bi bi-check2-circle text-success"></i> Quick Support</div>
+            <div class="col-6 col-md-3"><i class="bi bi-check2-circle text-success"></i> Reliable Help</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
