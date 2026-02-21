@@ -34,3 +34,5 @@ urlpatterns = [
     path('admin-panel/services/<int:pk>/edit/', views.admin_service_edit, name='admin_service_edit'),
     path('admin-panel/services/<int:pk>/delete/', views.admin_service_delete, name='admin_service_delete'),
 ]
+
+
