@@ -1,0 +1,1 @@
+web: gunicorn chandrabhushan_online.wsgi
