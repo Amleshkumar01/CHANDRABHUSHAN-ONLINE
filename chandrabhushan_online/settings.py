@@ -55,11 +55,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chandrabhushan_online.wsgi.application'
 
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("postgresql://chandrabhushan_user:0UQjVsrCywHzCdkhviYaRpY5hFgsC08R@dpg-d6cpu824d50c73a9u72g-a/chandrabhushan")
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
